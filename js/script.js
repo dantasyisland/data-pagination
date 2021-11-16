@@ -20,37 +20,77 @@ This function will create and insert/append the elements needed to display a "pa
 
 //        EXAMPLE - Student list item:
 
-// <li class="student-item cf">
-//    <div class="student-details">
-//       <img class="avatar" src="https://randomuser.me/api/portraits/women/25.jpg" alt="Profile Picture">
-//       <h3>Ethel Dean</h3>
-//       <span class="email">ethel.dean@example.com</span>
-//    </div>
-//    <div class="joined-details">
-//       <span class="date">Joined 12-15-2005</span>
-//    </div>
-// </li>
+// Function will create 9 li from two functions that create divs
+// pagination through the array
 
 // li has two children which are divs - student-details has 3 children - pic name email
 
-console.log(data);
-let ul = document.querySelector(".student-list")
-let li = document.createElement('li');
-let span = document.createElement('span');
-span.innerText = 'THE SPAN';
+
+
+
+
+
+
+let i = 0;
+
+const ul = document.querySelector('.student-list')
+
+// ------------------
+const li = document.createElement('li');
+li.className = 'student-item cf';
+// ----------------
+const studentDetailsDiv = document.createElement('div');
+studentDetailsDiv.className = 'student-details';
+
+// ------ 3 children - Parent Student Details Div
+
+const profilePic = document.createElement('img');
+profilePic.className = 'avatar';
+profilePic.src = data[i].picture.large;
+profilePic.alt = 'Profile Picture';
+
+const h3 = document.createElement('h3');
+h3.innerText = `${data[i].name.first} ${data[i].name.last}`
+
+const email = document.createElement('span');
+email.className = 'email';
+email.innerText = `${data[i].email}`;
+
+// ----- Append
+studentDetailsDiv.appendChild(profilePic);
+studentDetailsDiv.appendChild(h3);
+studentDetailsDiv.appendChild(email);
+
+
+// ---------------
+
+const joinedDetailsDiv = document.createElement('div');
+joinedDetailsDiv.className = 'joined-details';
+
+const dateJoined = document.createElement('span');
+dateJoined.className = 'joined-details';
+dateJoined.innerText = `Joined ${data[i].registered.date}`
+
+
+// ------ Append
+joinedDetailsDiv.appendChild(dateJoined)
+
+
+li.appendChild(studentDetailsDiv);
+li.appendChild(joinedDetailsDiv);
+
+// li two children the divs
+// StudentDetails - 3 children img h3 span email
+// Joined Details - 1 child - span date
+
 // li.appendChild(span);
 // ul.appendChild(li);
 
-let studentDetails = document.createElement('div');
-studentDetails.className = 'student-details';
-studentDetails.innerText = 'teststs'
 
 
-let profilePic = document.createElement('img');
-profilePic.src = data[0].picture.large;
-li.appendChild(profilePic)
+
 // li.appendChild.studentDetails;
-ul.appendChild();
+ul.appendChild(li);
 
 
 /*
