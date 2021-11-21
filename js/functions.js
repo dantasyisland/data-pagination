@@ -3,7 +3,7 @@
 function createList(){
     const ul = document.querySelector('.student-list')
 
-    for(let i = 0; i < 8; i++) {
+    for(let i = 0; i < 25; i++) {
         const li = createLI();
 
         const studentDetailsDiv = createElement('div','student-details')
@@ -58,9 +58,7 @@ function createLI() {
 const list = createList();
 
 // For every amount of X students add a button
-function Pagination {
 
-}
 // li two children the divs
 // StudentDetails - 3 children img h3 span email
 // Joined Details - 1 child - span date
