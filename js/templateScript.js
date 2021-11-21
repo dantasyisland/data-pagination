@@ -118,11 +118,13 @@ function addPagination(list) {
 
    linkList.addEventListener('click', e => {
       if (e.target.tagName === 'BUTTON') {
-      console.log("CLICKFOOL!");
+         document.querySelector('.active').className = '';
+         e.target.className = "active";
+         showPage(data,e.target.innerText)
       }
    })
 }
 addPagination(data);
-showPage(data, 4);
+showPage(data, 1);
 
 // Call functions
