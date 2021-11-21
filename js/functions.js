@@ -41,9 +41,11 @@ function createList(){
 
 }
 
+// Bracket notation fix
 
-function createElement(type, className, innertext) {
-    const element = document.createElement(type);
+// Function creates an element
+function createElement(elementName, className, innertext) {
+    const element = document.createElement(elementName);
     if(className) element.className = className;
     if(innertext) element.innerText = innertext;
     return element;
@@ -53,7 +55,6 @@ function createLI() {
     const li = createElement('li','student-item cf');
     return li
 }
-
 
 const list = createList();
 
