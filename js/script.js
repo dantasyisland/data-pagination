@@ -3,35 +3,26 @@ Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
 */
 
-
-
-/*
-For assistance:
-   Check out the "Project Resources" section of the Instructions tab: https://teamtreehouse.com/projects/data-pagination-and-filtering#instructions
-   Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
-*/
-
-
-let itemsPerPage = 9;
+const itemsPerPage = 9;
+const studentList = document.querySelector('.student-list');
 
 /*
 Create the `showPage` function
 This function will create and insert/append the elements needed to display a "page" of nine students
 */
-const studentList = document.querySelector('.student-list');
 
 /**
  * @param {Object[]} list
  * @page {number} page
  */
-function showPage(list,page) {
+function showPage(list, page) {
    const startIndex = (page * itemsPerPage) - itemsPerPage;
    const endIndex = page * itemsPerPage;
    studentList.innerHTML = '';
-   for(let i = 0; i < list.length; i++) {
-      if(i>=startIndex && i < endIndex) {
+   for (let i = 0; i < list.length; i++) {
+      if (i >= startIndex && i < endIndex) {
 
-      const studentHTML = `<li class="student-item cf">
+         const studentHTML = `<li class="student-item cf">
          <div class="student-details">
            <img class="avatar" src="${data[i].picture.large}">
            <h3>${data[i].name.first} ${data[i].name.last}</h3>
@@ -42,7 +33,7 @@ function showPage(list,page) {
          </div>
        </li>`
 
-         studentList.insertAdjacentHTML("beforeend",studentHTML); // before end because 1-9 not 9-
+         studentList.insertAdjacentHTML("beforeend", studentHTML); // before end because 1-9 not 9-
 
       }
 
@@ -60,7 +51,7 @@ function showPage(list,page) {
 
 
 
-      }
+   }
 
 
 }
@@ -75,39 +66,39 @@ This function will create and insert/append the elements needed for the paginati
 */
 
 function addPagination(list) {
-    // create a variable to calculate the number of pages needed
-   let numOfPages = Math.ceil(list.length/itemsPerPage);
-  // select the element with a class of `link-list` and assign it to a variable
+   // create a variable to calculate the number of pages needed
+   let numOfPages = Math.ceil(list.length / itemsPerPage);
+   // select the element with a class of `link-list` and assign it to a variable
    const linkList = document.querySelector('.link-list');
 
-  // set the innerHTML property of the variable you just created to an empty string
+   // set the innerHTML property of the variable you just created to an empty string
    linkList.innerHTML = '';
-  // loop over the number of pages needed
-     for(let i = 1; i <= numOfPages; i++) {
-        const button = `<li><button type="button">${i}</button></li>`
-        linkList.insertAdjacentHTML('beforeend',button)
+   // loop over the number of pages needed
+   for (let i = 1; i <= numOfPages; i++) {
+      const button = `<li><button type="button">${i}</button></li>`
+      linkList.insertAdjacentHTML('beforeend', button)
 
-        console.log(i);
-     }
-    // create the elements needed to display the pagination button
-    // insert the above elements
+      console.log(i);
+   }
+   // create the elements needed to display the pagination button
+   // insert the above elements
 
-  // give the first pagination button a class of "active"
-     document.querySelector('button').className = "active";
+   // give the first pagination button a class of "active"
+   document.querySelector('button').className = "active";
 
-  // create an event listener on the `link-list` element
-    // if the click target is a button:
-      // remove the "active" class from the previous button
-      // add the active class to the clicked button
-      // call the showPage function passing the `list` parameter and page to display as arguments
+   // create an event listener on the `link-list` element
+   // if the click target is a button:
+   // remove the "active" class from the previous button
+   // add the active class to the clicked button
+   // call the showPage function passing the `list` parameter and page to display as arguments
 
-      console.log(list);
+   console.log(list);
 
    linkList.addEventListener('click', e => {
       if (e.target.tagName === 'BUTTON') {
          document.querySelector('.active').className = '';
          e.target.className = "active";
-         showPage(data,e.target.innerText)
+         showPage(data, e.target.innerText)
       }
    })
 }
