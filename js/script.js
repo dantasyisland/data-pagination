@@ -30,12 +30,6 @@ function showPage(list,page) {
    studentList.innerHTML = '';
    for(let i = 0; i < list.length; i++) {
       if(i>=startIndex && i < endIndex) {
-         function createElement(elementName, className, innertext) {
-            const element = document.createElement(elementName);
-            if(className) element.className = className;
-            if(innertext) element.innerText = innertext;
-            return element;
-         }
 
       const studentHTML = `<li class="student-item cf">
          <div class="student-details">
@@ -48,14 +42,7 @@ function showPage(list,page) {
          </div>
        </li>`
 
-         studentList.insertAdjacentHTML("beforeend",studentHTML); // before end because 1-9 not 9-1
-
-
-
-
-
-
-
+         studentList.insertAdjacentHTML("beforeend",studentHTML); // before end because 1-9 not 9-
 
       }
 
@@ -125,42 +112,12 @@ function addPagination(list) {
    })
 }
 addPagination(data);
-// showPage(data, 1);
+showPage(data, 1);
 
 
 
 
 
 
-const h2 = document.querySelector('h2');
-const search = `<label for="search" class="student-search">
-                     <span>Search by name</span>
-                     <input id="search" placeholder="Search by name...">
-                     <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
-                </label>`
-h2.insertAdjacentHTML("afterend",search);
-let searchInput = document.querySelector('#search');
-let searchValue = searchInput.textValue; /// redunant
-
-searchInput.addEventListener('keyup', e => {
-   console.log(e.target.value);
-   removeChildren();
-   for(i = 0; i<=data.length; i++) {
-
-
-   }
-});
-
-if (!searchValue) {
-   showPage(data,1);
-}
-
-
-function removeChildren()  {
- while(studentList.firstChild) {
-    studentList.removeChild(studentList.firstChild)
- }
-}
-// removeChildren();
 
 // Call functions
