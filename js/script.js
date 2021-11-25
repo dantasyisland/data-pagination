@@ -1,11 +1,11 @@
-/*s
+/*
 Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
 */
 
 const itemsPerPage = 9;
 const studentList = document.querySelector('.student-list');
-
+const linkList = document.querySelector('.link-list');
 
 function showPage(list, page) {
    const startIndex = (page * itemsPerPage) - itemsPerPage;
@@ -24,11 +24,10 @@ function showPage(list, page) {
                   <span class="date">Joined ${list[i].registered.date}</span>
                </div>
             </li>`;
-         studentList.insertAdjacentHTML("beforeend", studentHTML);
+         studentList.insertAdjacentHTML('beforeend', studentHTML);
       }
    }
 }
-
 
 /*
 Create the `addPagination` function
@@ -36,28 +35,25 @@ This function will create and insert/append the elements needed for the paginati
 */
 
 function addPagination(list) {
-
-   let numOfPages = Math.ceil(list.length / itemsPerPage);
-   const linkList = document.querySelector('.link-list');
+   const numOfPages = Math.ceil(list.length / itemsPerPage);
 
    linkList.innerHTML = '';
 
    for (let i = 1; i <= numOfPages; i++) {
-      const button = `<li><button type="button">${i}</button></li>`
-      linkList.insertAdjacentHTML('beforeend', button)
+      const button = `<li><button type="button">${i}</button></li>`;
+      linkList.insertAdjacentHTML('beforeend', button);
    }
 
-   document.querySelector('button').className = "active";
+   document.querySelector('button').className = 'active';
 
-   linkList.addEventListener('click', e => {
+   linkList.addEventListener('click', (e) => {
       if (e.target.tagName === 'BUTTON') {
          document.querySelector('.active').className = '';
-         e.target.className = "active";
-         showPage(data, e.target.innerText)
+         e.target.className = 'active';
+         showPage(data, e.target.innerText);
       }
-   })
+   });
 }
-
 
 showPage(data, 1);
 addPagination(data);
@@ -68,52 +64,45 @@ const search = `
       <span>Search by name</span>
       <input id="search" placeholder="Search by name...">
       <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
-   </label>`
+   </label>`;
 
+h2.insertAdjacentHTML('afterend', search);
 
-h2.insertAdjacentHTML("afterend", search);
-
-let searchInput = document.querySelector('.student-search');
-let searchValue = document.querySelector('input');
+const searchInput = document.querySelector('.student-search');
+const searchValue = document.querySelector('input');
 
 function searchTable(input, list) {
    studentList.innerHTML = '';
-   let newList = []
+   const newList = [];
 
    for (let i = 0; i <= list.length - 1; i++) {
       if (input.length != 0 && (list[i].name.first.toLowerCase().includes(input.toLowerCase()) || list[i].name.last.toLowerCase().includes(input.toLowerCase()))) {
          newList.push(list[i]);
          showPage(newList, 1);
          addPagination(newList);
-
       }
-      //  else if (input.length != 0 && (list[i].name.first.toLowerCase().includes(input.toLowerCase()) || list[i].name.last.toLowerCase().includes(input.toLowerCase()))) {
-      //
-      //
-      // }
    }
+
    if (newList.length == 0) {
-      studentList.innerHTML = `<span>Sorry! No results found. Please search again</span>`;
-      document.querySelector('.link-list').innerHTML = '';
+      studentList.innerHTML = '<span>Sorry! No results found. Please search again</span>';
+      linkList.innerHTML = '';
    }
    console.log(newList);
 }
 
-// Both call search function
-searchInput.addEventListener('keyup', e => {
+searchInput.addEventListener('keyup', (e) => {
    e.preventDefault();
    if (searchValue.value == 0) {
-      showPage(data, 1)
+      showPage(data, 1);
       addPagination(data);
-
    } else if (searchValue.value != 0) {
-      searchTable(searchValue.value, data)
+      searchTable(searchValue.value, data);
    }
 });
 
-searchInput.addEventListener('click', e => {
+searchInput.addEventListener('click', (e) => {
    e.preventDefault();
    if (e.target.tagName === 'BUTTON' || e.target.tagName === 'IMG') {
       searchValue.value = '';
    }
-})
+});
