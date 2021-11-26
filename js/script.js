@@ -1,17 +1,17 @@
-/*
+/**
 Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
 This project will take an array of student objects and display the student's information along with their picture. Buttons will be added for pagination.
 This array is also searchable and dynamically updates as the user types or submits search information.
 */
 
-
-
+/**
+ *
+ */
 
 const itemsPerPage = 9;
 const studentList = document.querySelector('.student-list');
 const linkList = document.querySelector('.link-list');
-
 
 
 /**
@@ -47,9 +47,7 @@ function showPage(list, page) {
 /**
  * This function creates and inserts the elements needed for pagination buttons.
  * @param {array} list Array of student objects
- *
  */
-
 function addPagination(list) {
    const numOfPages = Math.ceil(list.length / itemsPerPage);
 
@@ -71,6 +69,10 @@ function addPagination(list) {
    });
 }
 
+
+/**
+ * The following code inserts a label to be accessed by the searchArray Function
+ */
 const h2 = document.querySelector('h2');
 const search = `
    <label for="search" class="student-search">
@@ -80,11 +82,16 @@ const search = `
    </label>`;
 
 h2.insertAdjacentHTML('afterend', search);
-
 const searchInput = document.querySelector('.student-search');
 const searchValue = document.querySelector('input');
 
-function searchTable(input, list) {
+/**
+ * This function searches through the array of student objects, generating a new array then calling showPage() and addPagination() with the new array
+ * to display search results to the page. If the new array is empty then no results were found in the search and
+ * @param {array} list Array of student objects
+ * @param {string} input User input from event listener on Search Label's Text Fied
+ */
+function searchArray(list, input) {
    studentList.innerHTML = '';
    const newList = [];
 
@@ -100,8 +107,13 @@ function searchTable(input, list) {
       studentList.innerHTML = '<span>Sorry! No results found. Please search again</span>';
       linkList.innerHTML = '';
    }
-   console.log(newList);
 }
+/**
+ * Event listeners for a both a 'keyup' and 'click' event.
+ * When user types or clicks the button search results will display
+ * searchArray() is called passing in both the array of student objects and the value of the users input
+ */
+
 
 searchInput.addEventListener('keyup', (e) => {
    e.preventDefault();
@@ -109,14 +121,15 @@ searchInput.addEventListener('keyup', (e) => {
       showPage(data, 1);
       addPagination(data);
    } else if (searchValue.value != 0) {
-      searchTable(searchValue.value, data);
+      searchArray(data, searchValue.value);
    }
 });
 
 searchInput.addEventListener('click', (e) => {
    e.preventDefault();
+
    if (e.target.tagName === 'BUTTON' || e.target.tagName === 'IMG') {
-      searchTable(searchValue.value, data);
+      searchArray(data, searchValue.value);
       searchValue.value = '';
    }
 });
